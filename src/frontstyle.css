@@ -1,0 +1,56 @@
+.con{
+    background-color:white;
+    margin-Top:15px;
+    border-Radius:10px;
+}
+td .delcolor{
+    background-color: red;
+}
+.card1{
+    height:650px;
+    margin:40px;
+}
+h1{
+    color:white
+}
+.mb-3 .sortl{
+    font:30px; 
+    margin-Bottom:0px;
+    color: white;
+    width:90%;
+}
+.mb-3{
+     margin:5%;
+     width:90%;
+     color:white;
+}
+.mt-2{
+    margin-Left:5%;
+    margin-Top:0px;
+}
+span{
+    color:red;
+}
+.b1{
+  margin-Bottom:0%;   
+  margin:10%;
+   width:80%;
+   height:50px;
+}
+.b2{
+    margin-Top:0%;
+    margin:10%;
+    width:80%;
+    height:50px;
+}
+.card2{
+    height:650px;
+    margin-Top:60px;
+    margin-Right:40px;
+    margin-Bottom:10px;
+}
+.table{
+    height:430px;
+    margin-Top:10px;
+    overflow-Y:scroll;
+}
