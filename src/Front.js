@@ -56,9 +56,9 @@ function Front(){
         const checkd=tables.findIndex((table)=>table.description===addData.desc);
         const typet=typeof(addData.head);
         const typed=typeof(addData.desc);
-        if((!addData.head )|| (!addData.desc) || (checkd!==-1) || (checkt!==-1) || (typet=="string") || (typed=="string"))
+        if((!addData.head )|| (!addData.desc) || (checkd!==-1) || (checkt!==-1) || (typet==="string") || (typed==="string"))
         {
-            if((typet=="string") || (typed=="string")){alert("Field Must be string");}
+            if((typet==="string") || (typed==="string")){alert("Field Must be string");}
             else{alert("Field Must Be Unique And Non-Empty");}
         }
         else{
@@ -189,7 +189,7 @@ function Front(){
                                     <td>{table.createdAt}</td>
                                     <td>
                                         <Button 
-                                        style={{backgroundColor:"red"}}
+                                        className="delcolor"
                                         onClick={()=>{warn(table.id)}} >
                                             Del
                                         </Button>
