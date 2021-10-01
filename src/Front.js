@@ -54,12 +54,10 @@ function Front(){
         let dateMDY = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
         const checkt=tables.findIndex((table)=>table.title===addData.head);
         const checkd=tables.findIndex((table)=>table.description===addData.desc);
-        const typet=typeof(addData.head);
-        const typed=typeof(addData.desc);
-        if((!addData.head )|| (!addData.desc) || (checkd!==-1) || (checkt!==-1) || (typet==="string") || (typed==="string"))
+        if((!addData.head )|| (!addData.desc) || (checkd!==-1) || (checkt!==-1))
         {
-            if((typet==="string") || (typed==="string")){alert("Field Must be string");}
-            else{alert("Field Must Be Unique And Non-Empty");}
+            
+            alert("Field Must Be Unique And Non-Empty");
         }
         else{
         const newDetail={
