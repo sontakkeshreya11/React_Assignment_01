@@ -189,8 +189,7 @@ function Assignment(){
                                     <td>
                                         <Button 
                                          variant="danger"
-                                         onClick={()=>{warn(table.id)}} >
-                                            Delete
+                                         onClick={()=>{warn(table.id)}} >Delete
                                         </Button>
                                     </td>
                                     </tr>
@@ -224,3 +223,4 @@ function Assignment(){
 
 }
 export default Assignment;
+
