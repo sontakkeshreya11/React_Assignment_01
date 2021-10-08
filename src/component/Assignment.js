@@ -51,21 +51,14 @@ function Assignment(){
         event.preventDefault();
         let date = new Date();
         let dateMDY = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
-<<<<<<< HEAD:src/component/Assignment.js
         const checkt=table.findIndex((table)=>table.title===addData.head);
         const checkd=table.findIndex((table)=>table.description===addData.desc);
-        if((!addData.head )|| (!addData.desc) || (checkd!==-1) || (checkt!==-1))
+        const whitespacehead=addData.head.indexOf(" ");
+        const whitespacedesc=addData.desc.indexOf(" ");
+        if((!addData.head )|| (!addData.desc) || (checkd!==-1) || (checkt!==-1)|| (whitespacehead===0) || (whitespacedesc===0))
         {
             
         alert("Field Must Be Unique And Non-Empty");
-=======
-        const checkt=tables.findIndex((table)=>table.title===addData.head);
-        const checkd=tables.findIndex((table)=>table.description===addData.desc);
-        if((!addData.head )|| (!addData.desc) || (checkd!==-1) || (checkt!==-1))
-        {
-            
-            alert("Field Must Be Unique And Non-Empty");
->>>>>>> 176aed419c578372dc328e3c219270c70df05caf:src/Front.js
         }
         else{
         const newDetail={
@@ -195,12 +188,8 @@ function Assignment(){
                                     <td>{table.createdAt}</td>
                                     <td>
                                         <Button 
-<<<<<<< HEAD:src/component/Assignment.js
                                          variant="danger"
-=======
-                                        className="delcolor"
->>>>>>> 176aed419c578372dc328e3c219270c70df05caf:src/Front.js
-                                        onClick={()=>{warn(table.id)}} >
+                                         onClick={()=>{warn(table.id)}} >
                                             Delete
                                         </Button>
                                     </td>
@@ -234,8 +223,4 @@ function Assignment(){
     ); 
 
 }
-<<<<<<< HEAD:src/component/Assignment.js
 export default Assignment;
-=======
-export default Front;
->>>>>>> 176aed419c578372dc328e3c219270c70df05caf:src/Front.js
