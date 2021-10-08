@@ -1,10 +1,9 @@
 import { useState} from 'react';
 import{Row,Container,Col,Card,Table,Button,Form} from 'react-bootstrap';
-import data from "./data.json";
+import data from './Data/data.json';
 import "./frontstyle.css";
-function Front(){ 
-    //storing data in tables
-    const [tables,setTables]=useState(data);
+function Assignment(){ 
+    const [table,setTable]=useState(data);
     //to add data
     const [addData,setAddData]=useState({
         head:'',
@@ -16,13 +15,13 @@ function Front(){
         desemp:'',
     });
     //after input
-    const takeChangeInput=(event)=>
+    const  afterTakingInput=(event)=>
     {
         event.preventDefault();
-        const nameoffield=event.target.getAttribute('name');
-        const valueoffield=event.target.value;
-        if(!valueoffield){
-            switch(nameoffield){
+        const field_name=event.target.getAttribute('name');
+        const field_value=event.target.value;
+        if(!field_value){
+            switch(field_name){
                 case "head":
                     error.titleemp="title is empty";
                     break;
@@ -40,7 +39,7 @@ function Front(){
              }
             setError(erc)
             const newFormData={...addData};
-            newFormData[nameoffield]=valueoffield;
+            newFormData[field_name]=field_value;
             setAddData(newFormData);
         }
        
@@ -52,25 +51,23 @@ function Front(){
         event.preventDefault();
         let date = new Date();
         let dateMDY = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
-        const checkt=tables.findIndex((table)=>table.title===addData.head);
-        const checkd=tables.findIndex((table)=>table.description===addData.desc);
-        const typet=typeof(addData.head);
-        const typed=typeof(addData.desc);
-        if((!addData.head )|| (!addData.desc) || (checkd!==-1) || (checkt!==-1) || (typet=="string") || (typed=="string"))
+        const checkt=table.findIndex((table)=>table.title===addData.head);
+        const checkd=table.findIndex((table)=>table.description===addData.desc);
+        if((!addData.head )|| (!addData.desc) || (checkd!==-1) || (checkt!==-1) ||(addData.desc.match(/^ &$/)!==null) )
         {
-            if((typet=="string") || (typed=="string")){alert("Field Must be string");}
-            else{alert("Field Must Be Unique And Non-Empty");}
+            
+        alert("Field Must Be Unique And Non-Empty");
         }
         else{
         const newDetail={
-            id:tables.length+1,
+            id:table.length+1,
             title:addData.head,
             description:addData.desc,
             createdAt:dateMDY,
         };
-        const newRow=[newDetail,...tables];
+        const newRow=[newDetail,...table];
         const newRows=[newDetail,...serchData]
-        setTables(newRow);
+        setTable(newRow);
         setSearchData(newRows)
         
          }
@@ -83,7 +80,7 @@ function Front(){
     {
           if(event.target.value!==""){
                setSearch(event.target.value);
-               const filtertable=tables.filter(o=>Object.keys(o).some(k=>String(o[k]).toLowerCase().includes(event.target.value.toLowerCase())));
+               const filtertable=table.filter(o=>Object.keys(o).some(k=>String(o[k]).toLowerCase().includes(event.target.value.toLowerCase())));
                setSearchData([...filtertable]);
                if(filtertable.length===0){
                    alert("element not found");
@@ -92,36 +89,36 @@ function Front(){
           }
           else{
               setSearch(event.target.value);
-              setTables([...tables]);
+              setTable([...table]);
           }
     }
     //delete
     const handleDelete=(tableid)=>{
-        const newTables=[...tables];
-        const index=tables.findIndex((table)=>table.id===tableid);
-        newTables.splice(index,1)
-        setTables(newTables);
-        setSearchData(newTables);
+        const newTable=[...table];
+        const index=table.findIndex((table)=>table.id===tableid);
+        newTable.splice(index,1)
+        setTable(newTable);
+        setSearchData(newTable);
     }
     //sorting
     const sorting=(event)=>
     {
         const field=event.target.value;
         if(field==="title"){
-        const sortedarr=[...tables].sort((a,b)=> a.title.localeCompare(b.title));
-        setTables(sortedarr);
+        const sortedarr=[...table].sort((a,b)=> a.title.localeCompare(b.title));
+        setTable(sortedarr);
         }
        else if(field==="details"){
-            const sortedarr=[...tables].sort((a,b)=> a.description.localeCompare(b.description));
-            setTables(sortedarr);
+            const sortedarr=[...table].sort((a,b)=> a.description.localeCompare(b.description));
+            setTable(sortedarr);
         }
         else if(field==="createOn"){
-            const sortedarr=[...tables].sort((a,b)=>a.createdAt.split('/').reverse().join().localeCompare(b.createdAt.split('/').reverse().join())); 
-            setTables(sortedarr);
+            const sortedarr=[...table].sort((a,b)=>a.createdAt.split('/').reverse().join().localeCompare(b.createdAt.split('/').reverse().join())); 
+            setTable(sortedarr);
         }
         else{
-            const sortedarr=[...tables].sort((a,b)=> a.id - b.id);
-            setTables(sortedarr);
+            const sortedarr=[...table].sort((a,b)=> a.id - b.id);
+            setTable(sortedarr);
         }
     }
     const warn=(num)=>{
@@ -139,13 +136,13 @@ function Front(){
                             <br/>
                                 <Form.Group className="mb-3" controlId="title" >
                                      <Form.Label>Title:</Form.Label>
-                                     <Form.Control type="Text" name="head"onChange={takeChangeInput} placeholder="Enter Title" required="required" />
+                                     <Form.Control type="Text" name="head"onChange={afterTakingInput} placeholder="Enter Title" required="required" />
                                      <span>{error.titleemp}</span>
                                      <br/>
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="descrip" style={{margin:"5%",width:"90%"}}>
                                     <Form.Label>Description:</Form.Label>
-                                    <Form.Control type="Text" onChange={takeChangeInput} name="desc" placeholder="Enter Description" required="required"/>
+                                    <Form.Control type="Text" onChange={afterTakingInput} name="desc" placeholder="Enter Description" required="required"/>
                                     <span>{error.desemp}</span>
                                 </Form.Group>
                                 <br/>
@@ -189,24 +186,25 @@ function Front(){
                                     <td>{table.createdAt}</td>
                                     <td>
                                         <Button 
-                                        style={{backgroundColor:"red"}}
+                                         variant="danger"
                                         onClick={()=>{warn(table.id)}} >
-                                            Del
+                                            Delete
                                         </Button>
                                     </td>
                                     </tr>
                                 ))
                                 :
-                                tables.map((table)=>(
+                                table.map((table)=>(
                                     <tr key={table.id}>
                                     <td>{table.id}</td>
                                     <td>{table.title}</td>
                                     <td>{table.description}</td>
                                     <td>{table.createdAt}</td>
                                     <td>
-                                        <Button className="delcolor"
+                                        <Button
+                                            variant="danger"
                                             onClick={()=>{warn(table.id)}}>
-                                            Del
+                                            Delete
                                         </Button>
                                     </td>
                                     </tr>
@@ -223,4 +221,4 @@ function Front(){
     ); 
 
 }
-export default Front;
+export default Assignment;
